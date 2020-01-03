@@ -1,0 +1,26 @@
+.BookDisplay {
+  text-align: left;
+  background: white;
+  z-index: 500;
+  display: flex;
+  box-shadow: 10px 10px #000;
+}
+.BookDisplay > * {
+  margin: 20px;
+}
+img {
+  max-width: 200px;
+  border: 2px solid teal;
+}
+
+.myTags {
+  max-width: 200px;
+  display: flex;
+  flex-wrap: wrap;
+}
+.myTags > * {
+  background: teal;
+  margin: 5px;
+  padding: 5px;
+  color: #fff;
+}

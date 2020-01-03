@@ -1,0 +1,12 @@
+.Header {
+  vertical-align: text-bottom;
+}
+
+.Header span {
+  background: yellow;
+  display: inline-block;
+  height: 50px;
+  line-height: 70px;
+  text-align: end;
+  width: 50px;
+}

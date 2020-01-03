@@ -1,13 +1,58 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+/* .slider {
+  position: fixed;
+  width: 30%;
+  height: 100vh;
+  background: #1e1e1e;
+  left: 0;
+  top: 0;
+  box-shadow: 0 2px 13px rgba(0, 0, 0, 0.3);
+  cursor: grab;
+  opacity: 0.5;
+  transition: opacity 800ms ease-in-out 200ms;
+  z-index: 999;
+} */
+
+/* .slider__size {
+  position: relative;
+  z-index: 3;
+}
+
+.slider__controller {
+  width: 100%;
+  padding-top: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform-origin: 0 0;
+  margin: -3px;
+  border-radius: 10px;
+  border: solid 3px black;
+}
+
+.slider__content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100%;
+  z-index: -1;
+  transform-origin: 0 0;
+} */
+
+.hidden {
+  display: none;
 }

@@ -1,0 +1,7 @@
+.AddBook {
+  background: white;
+  z-index: 500;
+}
+input {
+  display: block;
+}

@@ -1,0 +1,42 @@
+.MiniMap {
+  background: lightsteelblue;
+}
+
+.slider {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  z-index: 300;
+  box-shadow: 0 2px 13px rgba(0, 0, 0, 0.3);
+  background: lightsteelblue;
+}
+
+.slider__size {
+  position: relative;
+  z-index: 3;
+}
+
+.slider__controller {
+  width: 100%;
+  padding-top: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform-origin: 0 0;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.slider__content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100%;
+  z-index: -1;
+  transform-origin: 0 0;
+  border-width: 0px;
+}
+
+.hidden {
+  display: none;
+}

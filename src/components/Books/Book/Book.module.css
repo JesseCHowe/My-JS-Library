@@ -1,0 +1,14 @@
+.Book {
+  align-items: center;
+  background: lightcoral;
+  display: flex;
+  justify-content: center;
+  margin: 20px auto;
+  padding: 30px;
+  position: relative;
+  width: 400px;
+}
+
+.Book:hover {
+  transform: translate(5%);
+}
