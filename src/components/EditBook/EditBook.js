@@ -1,26 +1,22 @@
 import React, { Component } from "react";
+import Input from "../UI/Input/Input";
+import Spinner from "../UI/Spinner/Spinner";
 import { connect } from "react-redux";
 import * as actions from "../../store/actions/index";
-import styles from "./AddBook.module.css";
 
-import Backdrop from "../UI/Backdrop/Backdrop";
-import Input from "../UI/Input/Input";
-import Overlay from "../UI/Overlay/Overlay";
-import Spinner from "../UI/Spinner/Spinner";
-
-class AddBook extends Component {
+class EditBook extends Component {
   state = {
     bookForm: {
       cover: {
         elementType: "input",
         elementConfig: {
           type: "text",
-          placeholder: "Image URL Here"
+          placeholder: "Book Image"
         },
         validation: {
           required: false
         },
-        value: "",
+        value: this.props.bookToDisplay.cover,
         valid: true,
         touched: false
       },
@@ -30,11 +26,11 @@ class AddBook extends Component {
           type: "text",
           placeholder: "Book Title"
         },
-        value: "",
+        value: this.props.bookToDisplay.title,
         validation: {
-          required: true
+          required: false
         },
-        valid: false,
+        valid: true,
         touched: false
       },
       author: {
@@ -43,11 +39,11 @@ class AddBook extends Component {
           type: "text",
           placeholder: "Author"
         },
-        value: "",
+        value: this.props.bookToDisplay.author,
         validation: {
-          required: false
+          required: true
         },
-        valid: false,
+        valid: true,
         touched: false
       },
       read: {
@@ -56,12 +52,12 @@ class AddBook extends Component {
           type: "text",
           placeholder: "Pages Read"
         },
-        value: "",
+        value: this.props.bookToDisplay.read,
         validation: {
           required: true,
           isNumber: true
         },
-        valid: false,
+        valid: true,
         touched: false
       },
       pages: {
@@ -70,22 +66,20 @@ class AddBook extends Component {
           type: "text",
           placeholder: "Total Pages"
         },
-        value: "",
+        value: this.props.bookToDisplay.pages,
         validation: {
           required: true,
           isNumber: true
         },
-        valid: false,
+        valid: true,
         touched: false
       }
     },
-    formIsValid: false,
-    loading: false
+    formIsValid: true,
+    updating: false
   };
 
-  initialState = this.state;
-
-  orderHandler = event => {
+  updateBookHandler = event => {
     event.preventDefault();
     const formData = {};
     for (let formElementIdentifier in this.state.bookForm) {
@@ -93,17 +87,29 @@ class AddBook extends Component {
         formElementIdentifier
       ].value;
     }
-    const newBook = formData;
-    this.props.onAddBook(newBook, this.props.userId, this.props.token);
-    this.setState({ ...this.initialState });
+    const updatedBook = formData;
+    this.props.onEditBook(
+      this.props.bookToDisplay.key,
+      updatedBook,
+      this.props.userId,
+      this.props.token
+    );
   };
 
-  checkValidity(value, rules) {
+  deleteBookHandler = () => {
+    this.props.onDeleteBook(
+      this.props.userId,
+      this.props.bookToDisplay.key,
+      this.props.token
+    );
+  };
+
+  checkValidity(value, validation) {
     let isValid = true;
-    if (rules.required) {
+    if (validation.required) {
       isValid = value.trim() !== "" && isValid;
     }
-    if (rules.isNumber) {
+    if (validation.isNumber) {
       const numbers = /^[0-9]+$/;
       isValid = value.match(numbers) && isValid;
     }
@@ -111,12 +117,8 @@ class AddBook extends Component {
   }
 
   inputChangedHandler = (event, inputIdentifier) => {
-    const updatedBookForm = {
-      ...this.state.bookForm
-    };
-    const updatedBookFormElement = {
-      ...updatedBookForm[inputIdentifier]
-    };
+    const updatedBookForm = { ...this.state.bookForm };
+    const updatedBookFormElement = { ...updatedBookForm[inputIdentifier] };
     updatedBookFormElement.value = event.target.value;
     updatedBookFormElement.valid = this.checkValidity(
       updatedBookFormElement.value,
@@ -124,17 +126,11 @@ class AddBook extends Component {
     );
     updatedBookFormElement.touched = true;
     updatedBookForm[inputIdentifier] = updatedBookFormElement;
-    console.log(updatedBookFormElement);
     let formIsValid = true;
     for (let inputIdentifier in updatedBookForm) {
       formIsValid = updatedBookForm[inputIdentifier].valid && formIsValid;
     }
     this.setState({ bookForm: updatedBookForm, formIsValid: formIsValid });
-  };
-
-  hideBookHandler = () => {
-    this.props.onDisplayAddBook();
-    this.setState({ ...this.initialState });
   };
 
   render() {
@@ -146,7 +142,7 @@ class AddBook extends Component {
       });
     }
     let form = (
-      <form onSubmit={this.orderHandler}>
+      <form onSubmit={this.updateBookHandler}>
         {formElementsArray.map(formElement => (
           <Input
             changed={event => this.inputChangedHandler(event, formElement.id)}
@@ -159,24 +155,25 @@ class AddBook extends Component {
             value={formElement.config.value}
           />
         ))}
-        <button disabled={!this.state.formIsValid}>Add Book</button>
+        <button disabled={!this.state.formIsValid}>Edit Book</button>
       </form>
     );
+
     if (this.state.loading) {
       form = <Spinner />;
     }
+
     let formDisplay;
-    if (this.props.displayAddBookForm) {
+    if (this.props.displayBook) {
       formDisplay = (
-        <Overlay>
-          <Backdrop clicked={this.hideBookHandler} />
-          <div className={styles.AddBook}>
-            <h4>Enter your book</h4>
-            {form}
-          </div>
-        </Overlay>
+        <div>
+          <h4>Enter your book</h4>
+          <button onClick={this.deleteBookHandler}>DELETE BOOK</button>
+          {form}
+        </div>
       );
     }
+
     return <React.Fragment>{formDisplay}</React.Fragment>;
   }
 }
@@ -184,9 +181,11 @@ class AddBook extends Component {
 const mapStateToProps = state => {
   return {
     displayAddBookForm: state.library.displayAddBookForm,
+    displayBook: state.library.displayBook,
     library: state.library.books,
     token: state.auth.token,
-    userId: state.auth.userId
+    userId: state.auth.userId,
+    bookToDisplay: state.library.bookToDisplay
   };
 };
 
@@ -194,8 +193,12 @@ const mapDispatchToProps = dispatch => {
   return {
     onAddBook: (bookInfo, bookId, token) =>
       dispatch(actions.addBook(bookInfo, bookId, token)),
-    onDisplayAddBook: () => dispatch(actions.displayAddBook())
+    onDisplayAddBook: () => dispatch(actions.displayAddBook()),
+    onEditBook: (selectedBookId, newBookInfo, userId, token) =>
+      dispatch(actions.editBook(selectedBookId, newBookInfo, userId, token)),
+    onDeleteBook: (userId, bookKey, token) =>
+      dispatch(actions.deleteBook(userId, bookKey, token))
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(AddBook);
+export default connect(mapStateToProps, mapDispatchToProps)(EditBook);

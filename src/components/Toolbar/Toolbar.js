@@ -1,17 +1,26 @@
-import React from "react";
+import React, { Component } from "react";
 import styles from "./Toolbar.module.css";
+import { connect } from "react-redux";
+import * as actions from "../../store/actions/index";
 
-const toolbar = props => (
-  <div className={[styles.Toolbar, "visible"].join(" ")}>
-    <h3>My Toolbar</h3>
-    <button onClick={props.addBook}>Add Book</button>
-    <p>Sort By:</p>
-    <ul>
-      <li>Alphabetical</li>
-      <li>Author</li>
-      <li>Completed</li>
-    </ul>
-  </div>
-);
+class Toolbar extends Component {
+  displayAddBookHandler = () => {
+    this.props.onDisplayAddBook();
+  };
+  render() {
+    return (
+      <div className={[styles.Toolbar, "visible"].join(" ")}>
+        <h3>My Toolbar</h3>
+        <button onClick={this.displayAddBookHandler}>Add Book</button>
+      </div>
+    );
+  }
+}
 
-export default toolbar;
+const mapDispatchToProps = dispatch => {
+  return {
+    onDisplayAddBook: () => dispatch(actions.displayAddBook())
+  };
+};
+
+export default connect(null, mapDispatchToProps)(Toolbar);

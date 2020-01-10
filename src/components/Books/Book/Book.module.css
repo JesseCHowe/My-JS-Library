@@ -1,14 +1,51 @@
-.Book {
+.BookContain {
   align-items: center;
-  background: lightcoral;
+  background: #fff;
   display: flex;
+  flex-grow: 1;
   justify-content: center;
-  margin: 20px auto;
-  padding: 30px;
+  margin: 0 auto;
+  /* padding: 30px; */
   position: relative;
   width: 400px;
+  z-index: 0;
+  border-radius: 5px;
+  border: 1px solid #000;
+  overflow: hidden;
+  transition: transform 0.5s ease-out;
 }
 
-.Book:hover {
-  transform: translate(5%);
+.Book {
+  justify-content: center;
+  position: relative;
+  width: 400px;
+  z-index: 1;
+}
+.Book > * {
+  z-index: 50;
+}
+
+.Book p {
+  font-size: 1em;
+  font-weight: bold;
+}
+
+.BookContain:hover {
+  transform: translateX(2.5%);
+}
+
+.GradientOverlay {
+  z-index: 100;
+  background: #000;
+  position: absolute;
+  left: 0 !important;
+  width: 100%;
+
+  background: linear-gradient(
+    rgba(0, 0, 0, 0.15) 0%,
+    rgba(0, 0, 0, 0) 25%,
+    rgba(0, 0, 0, 0) 50%,
+    rgba(0, 0, 0, 0) 75%,
+    rgba(0, 0, 0, 0.15) 100%
+  );
 }

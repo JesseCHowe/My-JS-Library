@@ -1,122 +1,50 @@
 import React, { Component } from "react";
 import "./App.css";
-import Header from "./components/Header/Header";
+import AddBook from "./components/AddBook/AddBook";
+import Auth from "./components/Auth/Auth";
+import BookDisplay from "./components/BookDisplay/BookDisplay";
 import Books from "./components/Books/Books";
+import Header from "./components/Header/Header";
+// import MiniMap from "./components/MiniMap/MiniMap";
 import Toolbar from "./components/Toolbar/Toolbar";
-import MiniMap from "./components/MiniMap/MiniMap";
-import Overlay from "./components/UI/Overlay/Overlay";
 import Spinner from "./components/UI/Spinner/Spinner";
-import axios from "./axios";
+import { connect } from "react-redux";
+import * as actions from "./store/actions/index";
 
 class App extends Component {
-  constructor() {
-    super();
-    this.state = {
-      myJSBooks: null,
-      addBook: false,
-      //Local UI State: Move to their respective component
-      displayBook: false,
-      bookToDisplay: null,
-      loading: false,
-      error: false
-    };
-    this.handleChange = this.handleChange.bind(this);
-  }
-
   componentDidMount() {
-    this.loadLibraryData();
+    console.log("[APP] Did Mount");
+    this.props.onTryAutoSignIn();
   }
 
-  loadLibraryData = () => {
-    axios
-      .get("https://myjs-library.firebaseio.com/library.json")
-      .then(response => {
-        let arr = { ...response.data };
-        this.setState({
-          myJSBooks: arr
-        });
-      });
-  };
-
-  handleChange(e) {
-    this.setState({
-      [e.target.name]: e.target.value
-    });
+  componentDidUpdate() {
+    if (!this.props.library || !this.props.userId) {
+      console.log("[APP] Did Update");
+      this.props.onInitLibrary(this.props.userId);
+    }
   }
-
-  displayBookHandler = book => {
-    this.setState({ displayBook: true, bookToDisplay: book });
-  };
-
-  cancelDisplayBookHandler = () => {
-    this.setState({ displayBook: false });
-  };
-
-  addBookHandler = () => {
-    this.setState({
-      addBook: true
-    });
-    //   this.setState({ loading: true });
-    //   const order = {
-    //     cover: "new cover",
-    //     pages: 210,
-    //     read: 89,
-    //     title: "myBook"
-    //   };
-    //   axios
-    //     .post("/library.json", order)
-    //     .then(response => {
-    //       this.setState({
-    //         loading: false,
-    //         addBook: true
-    //       });
-    //       axios
-    //         .get("https://myjs-library.firebaseio.com/library.json")
-    //         .then(response => {
-    //           this.setState({ myJSBooks: response.data });
-    //         })
-    //         .catch(error => {
-    //           this.setState({ error: true });
-    //         });
-    //     })
-    //     .catch(error => {
-    //       this.setState({ loading: false });
-    //     });
-    // };
-  };
-
-  cancelAddBookHandler = () => {
-    this.setState({ addBook: false });
-  };
-
-  sendBookHandler = () => {
-    console.log("Sending Your Book");
-  };
 
   render() {
-    let myBooks = <Spinner />;
-    if (this.state.addBook || this.state.myJSBooks) {
-      myBooks = (
-        <Books
-          library={this.state.myJSBooks}
-          displayBook={this.displayBookHandler}
-        />
-      );
+    console.log("[APP] Did Render");
+    let myBooks = (
+      <div>
+        <p>Please Login to see your list of Javascript Books</p>
+      </div>
+    );
+    if (this.props.loading) {
+      myBooks = <Spinner />;
+    }
+    if (this.props.library) {
+      myBooks = <Books library={this.props.library} />;
     }
     return (
       <div className="App">
+        <Auth />
         <Header />
-        <Overlay
-          addBook={this.state.addBook}
-          showBook={this.state.displayBook}
-          currentBook={this.state.bookToDisplay}
-          cancel={this.cancelAddBookHandler}
-          dontShow={this.cancelDisplayBookHandler}
-          sendBook={this.sendBookHandler}
-          loadData={this.loadLibraryData}
-        />
         <div className="Flex-Container">
-          <Toolbar addBook={this.addBookHandler} />
+          <Toolbar />
+          <AddBook />
+          <BookDisplay />
           {myBooks}
           {/* <MiniMap library={this.state.myJSBooks} /> */}
         </div>
@@ -125,4 +53,20 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapStateToProps = state => {
+  return {
+    library: state.library.books,
+    error: state.library.error,
+    loading: state.library.loading,
+    userId: state.auth.userId
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onInitLibrary: user => dispatch(actions.initLibrary(user)),
+    onTryAutoSignIn: () => dispatch(actions.authCheckState())
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

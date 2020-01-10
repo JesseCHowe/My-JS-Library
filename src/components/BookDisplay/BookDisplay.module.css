@@ -2,12 +2,12 @@
   text-align: left;
   background: white;
   z-index: 500;
-  display: flex;
-  box-shadow: 10px 10px #000;
+  /* display: flex; */
 }
 .BookDisplay > * {
   margin: 20px;
 }
+
 img {
   max-width: 200px;
   border: 2px solid teal;

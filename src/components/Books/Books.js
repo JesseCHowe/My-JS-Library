@@ -6,13 +6,16 @@ import Book from "./Book/Book";
 const books = props => {
   return (
     <div className={styles.Books}>
-      {Object.keys(props.library).map(item => {
+      {Object.keys(props.library).map((item, idx) => {
         return (
           <Book
             book={props.library[item].title}
-            bookObj={props.library[item]}
+            bookObj={{
+              key: Object.keys(props.library)[idx],
+              book: props.library[item]
+            }}
             clicked={props.displayBook}
-            key={item}
+            key={Object.keys(props.library)[idx]}
           />
         );
       })}
