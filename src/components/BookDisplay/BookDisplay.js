@@ -41,19 +41,21 @@ class BookDisplay extends Component {
         <Overlay>
           <Backdrop clicked={this.hideBookDisplayHandler} />
           <div className={styles.BookDisplay}>
+            <div className={styles.Mode}>
+              <button
+                onClick={this.editModeHandler}
+                disabled={this.state.disableViewBtn}
+              >
+                View
+              </button>
+              <button
+                onClick={this.editModeHandler}
+                disabled={this.state.disableEditBtn}
+              >
+                Edit
+              </button>
+            </div>
             {bookDisplayContent}
-            <button
-              onClick={this.editModeHandler}
-              disabled={this.state.disableViewBtn}
-            >
-              View
-            </button>
-            <button
-              onClick={this.editModeHandler}
-              disabled={this.state.disableEditBtn}
-            >
-              Edit
-            </button>
           </div>
         </Overlay>
       );
