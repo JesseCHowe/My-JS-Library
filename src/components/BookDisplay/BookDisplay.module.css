@@ -1,13 +1,46 @@
-.BookDisplay {
-  text-align: left;
-  background: white;
-  z-index: 500;
-  /* display: flex; */
-}
-.BookDisplay > * {
-  margin: 20px;
+* {
+  box-sizing: border-box;
 }
 
+.BookDisplay {
+  text-align: left;
+  z-index: 500;
+  position: relative;
+  background: #efefef;
+  width: 60%;
+  min-width: 240px;
+  max-width: 500px;
+  overflow: hidden;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.3);
+  font-family: "Open Sans", sans-serif;
+  font-weight: 300;
+  line-height: 1.5;
+}
+
+.Mode {
+  height: 60px;
+  position: relative;
+  top: 0;
+  width: 100%;
+}
+.BookDisplay .Mode button {
+  width: 50%;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  float: left;
+  background: #333;
+  color: #efefef;
+  height: 40px;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.BookDisplay .Mode button:disabled {
+  background: #efefef;
+  color: #333;
+  height: 60px;
+}
 img {
   max-width: 200px;
   border: 2px solid teal;

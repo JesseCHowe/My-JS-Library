@@ -3,6 +3,7 @@ import Input from "../UI/Input/Input";
 import Spinner from "../UI/Spinner/Spinner";
 import { connect } from "react-redux";
 import * as actions from "../../store/actions/index";
+import styles from "./EditBook.module.css";
 
 class EditBook extends Component {
   state = {
@@ -144,18 +145,23 @@ class EditBook extends Component {
     let form = (
       <form onSubmit={this.updateBookHandler}>
         {formElementsArray.map(formElement => (
-          <Input
-            changed={event => this.inputChangedHandler(event, formElement.id)}
-            elementType={formElement.config.elementType}
-            elementConfig={formElement.config.elementConfig}
-            invalid={!formElement.config.valid}
-            key={formElement.id}
-            shouldValidate={formElement.config.validation}
-            touched={formElement.config.touched}
-            value={formElement.config.value}
-          />
+          <fieldset>
+            <label>{formElement.id}</label>
+            <Input
+              changed={event => this.inputChangedHandler(event, formElement.id)}
+              elementType={formElement.config.elementType}
+              elementConfig={formElement.config.elementConfig}
+              invalid={!formElement.config.valid}
+              key={formElement.id}
+              shouldValidate={formElement.config.validation}
+              touched={formElement.config.touched}
+              value={formElement.config.value}
+            />
+          </fieldset>
         ))}
-        <button disabled={!this.state.formIsValid}>Edit Book</button>
+        <button className={styles.Update} disabled={!this.state.formIsValid}>
+          UPDATE
+        </button>
       </form>
     );
 
@@ -166,10 +172,11 @@ class EditBook extends Component {
     let formDisplay;
     if (this.props.displayBook) {
       formDisplay = (
-        <div>
-          <h4>Enter your book</h4>
-          <button onClick={this.deleteBookHandler}>DELETE BOOK</button>
+        <div className={styles.EditForm}>
           {form}
+          <button className={styles.Delete} onClick={this.deleteBookHandler}>
+            DELETE
+          </button>
         </div>
       );
     }

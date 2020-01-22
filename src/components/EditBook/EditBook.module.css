@@ -1,0 +1,60 @@
+.EditForm form {
+  margin: 1rem;
+  position: relative;
+  top: 1rem;
+}
+
+.EditForm fieldset {
+  border: none;
+}
+
+.EditForm label {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #000;
+  text-transform: capitalize;
+}
+
+.EditForm input {
+  width: 100%;
+  margin-bottom: 1.5rem;
+  border: 0;
+  border-bottom: 0.05px solid gray;
+  height: 1.5rem;
+  background: #efefef;
+  font-size: 16px;
+  padding: 0;
+}
+
+.EditForm input:focus {
+  background-color: #333;
+  color: #efefef;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 1em;
+}
+.Update {
+  color: #efefef;
+  margin: 0 auto 2rem auto;
+  display: block;
+  background: #333;
+  font-weight: bold;
+  padding: 1rem;
+  border: 0;
+}
+
+.Delete {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  height: 40px;
+  border: 0;
+  background: #b9483d;
+  color: #efefef;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.EditForm .read input {
+  width: 50% !important;
+}
