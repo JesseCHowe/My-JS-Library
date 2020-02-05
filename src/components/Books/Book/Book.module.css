@@ -1,33 +1,45 @@
+@import url("https://fonts.googleapis.com/css?family=Roboto&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Playfair+Display&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Open+Sans&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Inconsolata|Open+Sans&display=swap");
+
 .BookContain {
   align-items: center;
   background: #fff;
   display: flex;
   flex-grow: 1;
-  justify-content: center;
   margin: 0 auto;
-  /* padding: 30px; */
   position: relative;
-  width: 400px;
+  width: 100%;
   z-index: 0;
   border-radius: 5px;
-  border: 1px solid #000;
+  border: 1px solid rgb(44, 41, 50);
   overflow: hidden;
   transition: transform 0.5s ease-out;
 }
-
-.Book {
-  justify-content: center;
-  position: relative;
-  width: 400px;
-  z-index: 1;
+.BookContain::after {
+  content: "";
+  display: block;
+  height: 110%;
+  width: 15px;
+  border: 1px solid rgb(44, 41, 50);
+  position: absolute;
+  top: -5%;
+  left: 10px;
+  z-index: 20;
 }
-.Book > * {
-  z-index: 50;
+.Book {
+  width: 100%;
+  z-index: 1;
+  padding: 0 10% 0 10%;
 }
 
 .Book p {
   font-size: 1em;
   font-weight: bold;
+  z-index: 20;
+  text-align: center;
+  color: #000;
 }
 
 .BookContain:hover {
@@ -40,12 +52,73 @@
   position: absolute;
   left: 0 !important;
   width: 100%;
-
+  top: 0;
   background: linear-gradient(
     rgba(0, 0, 0, 0.15) 0%,
-    rgba(0, 0, 0, 0) 25%,
+    rgba(0, 0, 0, 0) 10%,
     rgba(0, 0, 0, 0) 50%,
-    rgba(0, 0, 0, 0) 75%,
+    rgba(0, 0, 0, 0) 90%,
     rgba(0, 0, 0, 0.15) 100%
   );
+}
+
+.Red {
+  font-family: "Roboto", sans-serif;
+}
+.Red::after {
+  box-sizing: border-box;
+  content: "";
+  display: block;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 90%;
+  border: 0px;
+  border-right: 1px dashed rgb(44, 41, 50);
+  border-left: 1px dashed rgb(44, 41, 50);
+  position: absolute;
+  margin: 0 auto;
+  left: 5%;
+  right: 5%;
+}
+
+.Green {
+  font-family: "Playfair Display", serif;
+}
+.Green::after {
+  box-sizing: border-box;
+  content: "";
+  display: block;
+  top: 10%;
+  left: 0;
+  height: 80%;
+  width: 90%;
+  border: 0px;
+  border-right: 10px solid rgb(44, 41, 50);
+  position: absolute;
+  margin: 0 auto;
+  left: 5%;
+  right: 5%;
+}
+
+.Orange {
+  font-family: "Open Sans", sans-serif;
+}
+.Orange::after {
+  box-sizing: border-box;
+  content: "";
+  display: block;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 20%;
+  border: 0px;
+  border-left: 1px solid rgb(44, 41, 50);
+  position: absolute;
+  margin: 0 auto;
+  left: 5%;
+}
+
+.Blue {
+  font-family: "Inconsolata", monospace;
 }

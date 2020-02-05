@@ -8,12 +8,14 @@ import { createStore, applyMiddleware, combineReducers, compose } from "redux";
 import thunk from "redux-thunk";
 import libraryReducer from "./store/reducers/myJSLibrary";
 import authReducer from "./store/reducers/auth";
+import filterReducer from "./store/reducers/libraryFilters";
 
 import * as serviceWorker from "./serviceWorker";
 
 const rootReducer = combineReducers({
   library: libraryReducer,
-  auth: authReducer
+  auth: authReducer,
+  filters: filterReducer
 });
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

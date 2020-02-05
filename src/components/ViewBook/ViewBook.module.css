@@ -1,0 +1,18 @@
+.ViewBook {
+  display: flex;
+  padding: 1em;
+  flex-wrap: wrap;
+}
+
+.ViewBook > * {
+  padding: 0.2em;
+}
+
+.ViewBook p {
+  color: #fff;
+  word-break: break-word;
+}
+.ViewBook p span {
+  font-size: 0.75em;
+  color: lightgray;
+}

@@ -2,25 +2,43 @@ import React, { Component } from "react";
 import styles from "./Toolbar.module.css";
 import { connect } from "react-redux";
 import * as actions from "../../store/actions/index";
+import SortCategories from "./SortCategories/SortCategories";
+import SearchBar from "./SeachBar/SearchBar";
+import AddBookDisplay from "./AddBookDisplay/AddBookDisplay";
 
 class Toolbar extends Component {
-  displayAddBookHandler = () => {
-    this.props.onDisplayAddBook();
+  onExpandHandler = () => {
+    console.log("WORKING");
+    const myIntsct = document.querySelector("#myIntersect");
+    myIntsct.style.transform = "translateX(0)";
   };
   render() {
+    let displayAddBook;
+    if (this.props.userId) {
+      displayAddBook = <AddBookDisplay />;
+    }
     return (
       <div className={[styles.Toolbar, "visible"].join(" ")}>
-        <h3>My Toolbar</h3>
-        <button onClick={this.displayAddBookHandler}>Add Book</button>
+        <div id="myIntersect" className={styles.SlideInBar}>
+          <button
+            className={styles.Expand}
+            onClick={() => this.onExpandHandler()}
+          >
+            EXPAND
+          </button>
+          {displayAddBook}
+          <SearchBar />
+          <SortCategories />
+        </div>
       </div>
     );
   }
 }
 
-const mapDispatchToProps = dispatch => {
+const mapStateToProps = state => {
   return {
-    onDisplayAddBook: () => dispatch(actions.displayAddBook())
+    userId: state.auth.userId
   };
 };
 
-export default connect(null, mapDispatchToProps)(Toolbar);
+export default connect(mapStateToProps, null)(Toolbar);

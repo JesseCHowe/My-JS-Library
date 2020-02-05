@@ -1,12 +1,25 @@
 import React, { Component } from "react";
 import styles from "./MiniMap.module.css";
+import { connect } from "react-redux";
+import BookCount from "./BookCount/BookCount";
 
 class miniMap extends Component {
-  componentDidMount() {
+  componentDidUpdate(prevProps) {
+    if (prevProps !== this.props) {
+      this.renderMap();
+    }
+  }
+
+  renderMap() {
     const doc = document,
       myMap = document.querySelector(".myMap"),
       body = doc.body,
-      win = window;
+      win = window,
+      myHeader = document.getElementsByClassName("showHead");
+
+    if (myMap) {
+      myMap.innerHTML = "";
+    }
 
     let slider = doc.createElement("div"),
       sliderSize = doc.createElement("div"),
@@ -20,20 +33,26 @@ class miniMap extends Component {
     controller.className = styles.slider__controller;
 
     sliderContent.className += styles.slider__content;
-    sliderContent.style.transformOrigin = "0 0";
+    // sliderContent.style.transformOrigin = `0  0`;
 
     let html = doc.documentElement.outerHTML.replace(
       /<script([\s\S]*?)>([\s\S]*?)<\/script>/gim,
       ""
     );
+
     const script =
       '<script>var slider=document.querySelector(".slider"); slider.parentNode.removeChild(slider);<' +
       "/script>";
 
     html = html.replace("</body>", script + "</body>");
     html = html.replace("visible", "hidden");
-    html = html.replace("showHead", "hidden");
+    // html = html.replace("showHead", "hidden");
+
     html = html.replace("showMyMap", "hidden");
+    html = html.replace("myIntersect", "hidden");
+    html = html.replace("hideAuth", "hidden");
+    html = html.replace("theMiniMap", "hidden");
+    html = html.replace("bookCount", "hidden");
 
     slider.appendChild(sliderSize);
     slider.appendChild(controller);
@@ -41,9 +60,10 @@ class miniMap extends Component {
     myMap.appendChild(slider);
 
     var iframeDoc = sliderContent.contentWindow.document;
-
     iframeDoc.open();
     iframeDoc.write(html);
+    iframeDoc.querySelector(".showHead").remove();
+
     iframeDoc.close();
 
     function getDimensions() {
@@ -51,7 +71,7 @@ class miniMap extends Component {
         bodyRatio = body.clientHeight / bodyWidth,
         winRatio = win.innerHeight / win.innerWidth;
 
-      slider.style.width = "200px";
+      slider.style.width = "250px";
 
       realScale = slider.clientWidth / bodyWidth;
 
@@ -67,12 +87,14 @@ class miniMap extends Component {
     win.addEventListener("resize", getDimensions);
     win.addEventListener("load", getDimensions);
 
+    const set = win.pageXOffset;
+
     function trackScroll() {
       controller.style.transform =
         "translate(" +
-        win.pageXOffset * realScale +
+        set * realScale +
         "px, " +
-        win.pageYOffset * realScale +
+        (win.pageYOffset - myHeader[0].clientHeight) * realScale +
         "px)";
     }
 
@@ -107,7 +129,7 @@ class miniMap extends Component {
           y = e.touches ? e.touches[0].clientY : e.clientY;
 
         win.scrollBy((x - mouseX) / realScale, (y - mouseY) / realScale);
-        mouseX = x;
+        mouseX = set;
         mouseY = y;
       }
     }
@@ -130,15 +152,27 @@ class miniMap extends Component {
   }
 
   render() {
-    let bookCount = Object.keys(this.props.library).reduce((sum, key) => {
-      return (sum += 1);
-    }, 0);
+    let bookCount = 0;
+    if (this.props.library) {
+      bookCount = Object.keys(this.props.library).reduce((sum, key) => {
+        return (sum += 1);
+      }, 0);
+    }
     return (
-      <div className="myMap showMyMap">
-        <h4>There are {bookCount} Books</h4>
+      <div id="theMiniMap" className={styles.myMap}>
+        <BookCount count={bookCount} />
+        <div className={[styles.miniMap, "myMap"].join(" ")}></div>
       </div>
     );
   }
 }
 
-export default miniMap;
+const mapStateToProps = state => {
+  return {
+    library: state.library.books,
+    method: state.filters.sortMethod,
+    searchField: state.filters.search
+  };
+};
+
+export default connect(mapStateToProps, null)(miniMap);

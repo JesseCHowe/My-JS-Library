@@ -7,6 +7,7 @@
   width: 1em;
   height: 4em;
 }
+
 .Loader {
   color: #fff640;
   text-indent: -9999em;
@@ -19,20 +20,24 @@
   -webkit-animation-delay: -0.16s;
   animation-delay: -0.16s;
 }
+
 .Loader:before,
 .Loader:after {
   position: absolute;
   top: 0;
   content: "";
 }
+
 .Loader:before {
   left: -1.5em;
   -webkit-animation-delay: -0.32s;
   animation-delay: -0.32s;
 }
+
 .Loader:after {
   left: 1.5em;
 }
+
 @-webkit-keyframes load1 {
   0%,
   80%,

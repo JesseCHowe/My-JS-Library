@@ -1,10 +1,17 @@
 .App {
-  text-align: center;
+  /* text-align: center; */
+  background-color: #36393f;
+  min-height: 130vh;
+}
+.Flex-Container {
+  position: relative;
 }
 
-.Flex-Container {
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: row;
-  /* min-height: 100vh; */
+#myIntersect {
+  transform: translateX(-100%);
+  transition: 1s;
+}
+
+.TESTBOOKS {
+  position: absolute;
 }

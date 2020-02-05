@@ -1,12 +1,12 @@
 import React, { Component } from "react";
+import styles from "./AddBook.module.css";
 import { connect } from "react-redux";
 import * as actions from "../../store/actions/index";
-import styles from "./AddBook.module.css";
-
 import Backdrop from "../UI/Backdrop/Backdrop";
 import Input from "../UI/Input/Input";
 import Overlay from "../UI/Overlay/Overlay";
 import Spinner from "../UI/Spinner/Spinner";
+import Button from "../UI/Button/Button";
 
 class AddBook extends Component {
   state = {
@@ -14,8 +14,7 @@ class AddBook extends Component {
       cover: {
         elementType: "input",
         elementConfig: {
-          type: "text",
-          placeholder: "Image URL Here"
+          type: "text"
         },
         validation: {
           required: false
@@ -27,8 +26,7 @@ class AddBook extends Component {
       title: {
         elementType: "input",
         elementConfig: {
-          type: "text",
-          placeholder: "Book Title"
+          type: "text"
         },
         value: "",
         validation: {
@@ -40,8 +38,7 @@ class AddBook extends Component {
       author: {
         elementType: "input",
         elementConfig: {
-          type: "text",
-          placeholder: "Author"
+          type: "text"
         },
         value: "",
         validation: {
@@ -53,8 +50,7 @@ class AddBook extends Component {
       read: {
         elementType: "text",
         elementConfig: {
-          type: "text",
-          placeholder: "Pages Read"
+          type: "text"
         },
         value: "",
         validation: {
@@ -67,8 +63,7 @@ class AddBook extends Component {
       pages: {
         elementType: "text",
         elementConfig: {
-          type: "text",
-          placeholder: "Total Pages"
+          type: "text"
         },
         value: "",
         validation: {
@@ -98,7 +93,7 @@ class AddBook extends Component {
     this.setState({ ...this.initialState });
   };
 
-  checkValidity(value, rules) {
+  checkValidityHandler(value, rules) {
     let isValid = true;
     if (rules.required) {
       isValid = value.trim() !== "" && isValid;
@@ -118,7 +113,7 @@ class AddBook extends Component {
       ...updatedBookForm[inputIdentifier]
     };
     updatedBookFormElement.value = event.target.value;
-    updatedBookFormElement.valid = this.checkValidity(
+    updatedBookFormElement.valid = this.checkValidityHandler(
       updatedBookFormElement.value,
       updatedBookFormElement.validation
     );
@@ -139,16 +134,20 @@ class AddBook extends Component {
 
   render() {
     const formElementsArray = [];
+
     for (let key in this.state.bookForm) {
       formElementsArray.push({
         id: key,
         config: this.state.bookForm[key]
       });
     }
+
     let form = (
       <form onSubmit={this.orderHandler}>
         {formElementsArray.map(formElement => (
           <Input
+            inputType="EditBook"
+            label={formElement.id}
             changed={event => this.inputChangedHandler(event, formElement.id)}
             elementType={formElement.config.elementType}
             elementConfig={formElement.config.elementConfig}
@@ -159,13 +158,18 @@ class AddBook extends Component {
             value={formElement.config.value}
           />
         ))}
-        <button disabled={!this.state.formIsValid}>Add Book</button>
+        <Button btnType="Update" disabled={!this.state.formIsValid}>
+          ADD BOOK
+        </Button>
       </form>
     );
+
     if (this.state.loading) {
       form = <Spinner />;
     }
+
     let formDisplay;
+
     if (this.props.displayAddBookForm) {
       formDisplay = (
         <Overlay>
@@ -177,6 +181,7 @@ class AddBook extends Component {
         </Overlay>
       );
     }
+
     return <React.Fragment>{formDisplay}</React.Fragment>;
   }
 }
@@ -184,7 +189,6 @@ class AddBook extends Component {
 const mapStateToProps = state => {
   return {
     displayAddBookForm: state.library.displayAddBookForm,
-    library: state.library.books,
     token: state.auth.token,
     userId: state.auth.userId
   };

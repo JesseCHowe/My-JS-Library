@@ -34,28 +34,38 @@ class BookDisplay extends Component {
   render() {
     let bookDisplay;
     let bookDisplayContent;
-
+    let editButton;
     if (this.props.displayBook) {
-      bookDisplayContent = this.state.editMode ? <EditBook /> : <ViewBook />;
+      bookDisplayContent = <ViewBook />;
+      if (this.props.userId) {
+        bookDisplayContent = this.state.editMode ? <EditBook /> : <ViewBook />;
+        editButton = (
+          <button
+            className={styles.Edit}
+            onClick={this.editModeHandler}
+            disabled={this.state.disableEditBtn}
+          >
+            Edit
+          </button>
+        );
+      }
       bookDisplay = (
         <Overlay>
           <Backdrop clicked={this.hideBookDisplayHandler} />
           <div className={styles.BookDisplay}>
             <div className={styles.Mode}>
               <button
+                className={styles.View}
                 onClick={this.editModeHandler}
                 disabled={this.state.disableViewBtn}
               >
                 View
               </button>
-              <button
-                onClick={this.editModeHandler}
-                disabled={this.state.disableEditBtn}
-              >
-                Edit
-              </button>
+              {editButton}
             </div>
-            {bookDisplayContent}
+            <div className={styles.bookDisplayContainer}>
+              {bookDisplayContent}
+            </div>
           </div>
         </Overlay>
       );

@@ -42,7 +42,7 @@ const input = props => {
   }
 
   return (
-    <div className={styles.Input}>
+    <div className={[styles.Input, styles[props.inputType]].join(" ")}>
       <label>{props.label}</label>
       {inputElement}
     </div>

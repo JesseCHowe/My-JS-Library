@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import * as actions from "../../store/actions/index";
+import styles from "./ViewBook.module.css";
 
 class BookDisplay extends Component {
   render() {
@@ -19,15 +20,31 @@ class BookDisplay extends Component {
         );
       }
       bookDisplay = (
-        <div>
+        <div className={styles.ViewBook}>
           {bookImage}
           <div>
-            <p>Title: {this.props.bookToDisplay.title}</p>
-            <p>
-              Pages: {this.props.bookToDisplay.read} /{" "}
-              {this.props.bookToDisplay.pages}
-            </p>
-            <p>Author: Author Name Here</p>
+            <div>
+              <p>
+                You've read{" "}
+                {Math.round(
+                  (this.props.bookToDisplay.read /
+                    this.props.bookToDisplay.pages) *
+                    100
+                )}
+                %
+              </p>
+              <p>
+                <span>Title: </span> {this.props.bookToDisplay.title}
+              </p>
+              <p>
+                <span>Read: </span>
+                {this.props.bookToDisplay.read} /{" "}
+                {this.props.bookToDisplay.pages}
+              </p>
+              <p>
+                <span>Author: </span> Author Name Here
+              </p>
+            </div>
           </div>
         </div>
       );

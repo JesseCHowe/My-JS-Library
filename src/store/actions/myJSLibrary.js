@@ -66,7 +66,6 @@ export const initLibrary = user => {
       axios
         .get(`https://myjs-library.firebaseio.com/library/${user}.json`)
         .then(response => {
-          console.log("AXIOS LIBRBARY INIT");
           let arr = { ...response.data };
           dispatch(setLibrary(arr));
         })
@@ -74,7 +73,7 @@ export const initLibrary = user => {
           dispatch(fetchBooksFailed(error));
         });
     } else {
-      dispatch(setLibrary(null));
+      console.log("INIT LIB");
     }
   };
 };
@@ -96,9 +95,6 @@ export const addBook = (bookInfo, userId, token) => {
 
 export const deleteBook = (userId, bookKey, token) => {
   return dispatch => {
-    console.log(
-      `https://myjs-library.firebaseio.com/library/${userId}/${bookKey}.json?auth=${token}`
-    );
     axios
       .delete(
         `https://myjs-library.firebaseio.com/library/${userId}/${bookKey}.json?auth=${token}`

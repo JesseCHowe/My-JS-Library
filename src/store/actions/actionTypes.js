@@ -20,3 +20,7 @@ export const AUTH_SUCCESS = "AUTH_SUCCESS";
 export const AUTH_FAIL = "AUTH_FAIL";
 export const AUTH_DISPLAY = "AUTH_DISPLAY";
 export const AUTH_LOGOUT = "AUTH_LOGOUT";
+
+export const CHOOSE_SORT_METHOD = "CHOOSE_SORT_METHOD";
+export const CHOOSE_BOOK_TYPE = "CHOOSE_BOOK_TYPE";
+export const ENTER_SEARCH_FIELD = "ENTER_SEARCH_FIELD";

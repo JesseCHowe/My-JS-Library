@@ -1,32 +1,19 @@
-/* .Input {
-  box-sizing: border-box;
-
+.Input input {
+  background: none;
+  border: 0;
+  border-bottom: 1px solid #efefef;
+  margin: 0;
   width: 100%;
+  /* max-width: 250px; */
+  font-size: 1em;
+  color: #efefef;
 }
 
-.Label {
-  display: block;
-  font-weight: bold;
-  margin-bottom: 8px;
+.EditBook {
+  margin: 1em 0;
 }
 
-.InputElement {
-  background-color: white;
-  border: 1px solid #ccc;
-  box-sizing: border-box;
-  display: block;
-  font: inherit;
-  outline: none;
-  padding: 6px 10px;
-  width: 100%;
+.Input label {
+  text-align: left;
+  text-transform: capitalize;
 }
-
-.InputElement:focus {
-  background-color: #ccc;
-  outline: none;
-}
-
-.Invalid {
-  background-color: lightcoral;
-  border: 1px solid red;
-} */

@@ -8,3 +8,8 @@ export {
   editBook
 } from "./myJSLibrary";
 export { auth, authCheckState, display, logout } from "./auth";
+export {
+  chooseSortMethod,
+  chooseBookType,
+  enterSearchField
+} from "./filterMethods";

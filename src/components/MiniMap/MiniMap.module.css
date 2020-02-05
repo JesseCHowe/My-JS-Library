@@ -1,5 +1,19 @@
 .MiniMap {
-  background: lightsteelblue;
+  background: #36393f;
+}
+
+.myMap {
+  position: fixed;
+  top: 0;
+  right: 0;
+  transition: 1s;
+  width: 250px;
+  box-shadow: 0 2px 13px rgba(0, 0, 0, 0.3);
+}
+
+.miniMap {
+  position: relative;
+  z-index: -1;
 }
 
 .slider {
@@ -7,8 +21,7 @@
   top: 0;
   height: 100vh;
   z-index: 300;
-  box-shadow: 0 2px 13px rgba(0, 0, 0, 0.3);
-  background: lightsteelblue;
+  background: #36393f;
 }
 
 .slider__size {
@@ -39,4 +52,10 @@
 
 .hidden {
   display: none;
+}
+
+@media only screen and (max-width: 1100px) {
+  .myMap {
+    display: none;
+  }
 }

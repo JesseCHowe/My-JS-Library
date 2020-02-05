@@ -146,8 +146,9 @@ class EditBook extends Component {
       <form onSubmit={this.updateBookHandler}>
         {formElementsArray.map(formElement => (
           <fieldset>
-            <label>{formElement.id}</label>
             <Input
+              inputType="EditBook"
+              label={formElement.id}
               changed={event => this.inputChangedHandler(event, formElement.id)}
               elementType={formElement.config.elementType}
               elementConfig={formElement.config.elementConfig}

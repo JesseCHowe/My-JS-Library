@@ -1,8 +1,9 @@
 import React, { Component } from "react";
+import styles from "./Auth.module.css";
 import { connect } from "react-redux";
 import * as actions from "../../store/actions/index";
-
 import Backdrop from "../UI/Backdrop/Backdrop";
+import Button from "../UI/Button/Button";
 import Input from "../UI/Input/Input";
 import Overlay from "../UI/Overlay/Overlay";
 import Spinner from "../UI/Spinner/Spinner";
@@ -39,11 +40,12 @@ class Auth extends Component {
         touched: false
       }
     },
-    isSignUp: true,
-    displayForm: false
+    isSignUp: false,
+    displayForm: false,
+    openDropDown: false
   };
 
-  checkValidity(value, rules) {
+  checkValidityHandler(value, rules) {
     let isValid = true;
     if (rules.required) {
       isValid = value.trim() !== "" && isValid;
@@ -57,7 +59,7 @@ class Auth extends Component {
       [controlName]: {
         ...this.state.controls[controlName],
         value: event.target.value,
-        valid: this.checkValidity(
+        valid: this.checkValidityHandler(
           event.target.value,
           this.state.controls[controlName].validation
         ),
@@ -90,8 +92,15 @@ class Auth extends Component {
     this.props.onLogout();
   };
 
+  toggleDropHandler = () => {
+    this.setState(prevState => {
+      return { openDropDown: !prevState.openDropDown };
+    });
+  };
+
   render() {
     const formElementsArray = [];
+
     for (let key in this.state.controls) {
       formElementsArray.push({
         id: key,
@@ -128,37 +137,81 @@ class Auth extends Component {
       form = (
         <Overlay>
           <Backdrop clicked={this.loginFormHandler} />
-          <div>
-            <form onSubmit={this.submitHandler}>
-              {errorMessage}
-              {formInput}
-              <button>Sign Up</button>
-            </form>
-            <button onClick={this.switchAuthModeHandler}>
-              SWITCH TO {this.state.isSignUp ? "SIGN IN" : "SIGN UP"}
-            </button>
+          <div className={styles.SIGNUP}>
+            <div className={styles.Design}>
+              <span>
+                BUILD
+                <br />
+                YOUR
+                <br />
+                JAVASCRIPT
+                <br />
+                COLLECTION
+              </span>
+            </div>
+            <div className={styles.FormContainer}>
+              <div>
+                <form onSubmit={this.submitHandler}>
+                  {errorMessage}
+                  {formInput}
+                  <Button btnType="Test">
+                    {this.state.isSignUp ? "SIGN UP" : "SIGN IN"}
+                  </Button>
+                </form>
+                <Button
+                  btnType="changeAuth"
+                  clicked={this.switchAuthModeHandler}
+                >
+                  SWITCH TO {this.state.isSignUp ? "SIGN IN" : "SIGN UP"}
+                </Button>
+              </div>
+            </div>
           </div>
         </Overlay>
       );
     }
 
     let authDisplay = (
-      <button onClick={this.loginFormHandler}>SIGN IN / SIGN UP</button>
+      <Button btnType="SignIn" clicked={this.loginFormHandler}>
+        SIGN IN / SIGN UP
+      </Button>
     );
+    let logOut;
+    if (this.state.openDropDown) {
+      logOut = (
+        <Button btnType="Logout" clicked={this.logoutFormHandler}>
+          Logout
+        </Button>
+      );
+    }
     if (this.props.user) {
       authDisplay = (
-        <React.Fragment>
-          <h3>Welcome {this.props.user}</h3>
-          <button onClick={this.logoutFormHandler}>Logout</button>
-        </React.Fragment>
+        <div className={styles.Auth}>
+          <div className={styles.Dropdown}>
+            <Button btnType="Welcome" clicked={this.toggleDropHandler}>
+              <span>Welcome, </span>
+              {this.props.user}
+              <span className={styles.DropDownBtn}>
+                <svg
+                  focusable="false"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"></path>
+                </svg>
+              </span>
+            </Button>
+            <div className={styles.DropdownContent}>{logOut}</div>
+          </div>
+        </div>
       );
     }
 
     return (
-      <React.Fragment>
+      <div id="hideAuth">
         {authDisplay}
         {form}
-      </React.Fragment>
+      </div>
     );
   }
 }

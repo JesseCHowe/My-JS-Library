@@ -1,7 +1,32 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
 .Toolbar {
-  background: lightsteelblue;
-  /* min-width: 250px; */
-  flex-grow: 1;
+  width: 240px;
+  position: fixed;
+  top: 0;
+  z-index: 50;
+  text-align: left;
+  text-transform: uppercase;
+}
+.Expand {
+  transform: translateX(220px);
+  margin: 0;
+  top: 0;
+  padding: 1em;
+  border: 0;
+  background: #2f3136;
+  color: #efefef;
+}
+.SlideInBar > * {
+  margin: 1em 0;
+}
+.SlideInBar {
+  background: #2f3136;
+  height: 100vh;
+  padding: 1em;
 }
 
 @media (min-width: 570px) {

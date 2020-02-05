@@ -1,0 +1,46 @@
+.Auth {
+  position: absolute;
+  right: 1em;
+  top: 1em;
+}
+
+.SIGNUP {
+  background: #36393f;
+  width: 60%;
+  display: flex;
+  min-height: 400px;
+}
+
+.Design {
+  width: 50%;
+  background-color: #ffed77;
+  position: relative;
+}
+
+.FormContainer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.Design span {
+  color: #333;
+  font-weight: bold;
+  font-size: 2em;
+  text-align: right;
+  display: block;
+  right: 0.2em;
+  bottom: 0;
+  position: absolute;
+}
+
+.DropDownBtn svg {
+  pointer-events: none;
+  fill: #fff;
+  width: 20px;
+}
+
+.DropDownBtn path {
+  transform: translate(0px, 7px);
+}

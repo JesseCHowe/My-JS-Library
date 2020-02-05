@@ -19,6 +19,14 @@ class Book extends Component {
       width: `${this.props.bookObj.book.pages * 1.05}px`
     };
 
+    const randomStyles = [
+      styles.Red,
+      styles.Green,
+      styles.Blue,
+      styles.Yellow,
+      styles.Orange
+    ];
+
     let style = {
       minHeight: "20px",
       maxHeight: "150px",
@@ -27,39 +35,28 @@ class Book extends Component {
         100}%`,
       position: "absolute",
       left: "0",
-      background: "lightblue"
+      top: "0",
+      background: "#ffed77",
+      zIndex: "-1"
     };
 
-    if (this.props.bookObj.book.read / this.props.bookObj.book.pages === 0.5) {
-      style = {
-        ...style,
-        background: "lightgreen"
-      };
-    }
-
-    // if (this.props.bookObj.book.pages > 300) {
-    //   bookStyle = {
-    //     ...bookStyle,
-    //     left: "10px"
-    //   };
-    // } else {
-    //   bookStyle = {
-    //     ...bookStyle,
-    //     right: `${this.props.bookObj.book.pages}px`
-    //   };
-    // }
+    let bookInternal = (
+      <div className={styles.Book} key={this.props.bookObj.key}>
+        <p>{this.props.book}</p>
+        <span style={style}></span>
+      </div>
+    );
 
     return (
       <div
         style={bookStyle}
-        className={styles.BookContain}
+        className={[
+          styles.BookContain,
+          randomStyles[Math.floor(Math.random() * 5)]
+        ].join(" ")}
         onClick={this.bookDisplayHandler}
       >
-        <div style={bookStyle} className={styles.GradientOverlay}></div>
-        <div className={styles.Book} key={this.props.bookObj.key}>
-          <p>{this.props.book}</p>
-        </div>
-        <div style={style}></div>
+        {bookInternal}
       </div>
     );
   }

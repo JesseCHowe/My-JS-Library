@@ -1,12 +1,24 @@
 .Header {
+  color: #fff;
   vertical-align: text-bottom;
+  padding-top: 1em;
+  text-align: center;
 }
 
 .Header span {
-  background: yellow;
+  background: #ffed77;
   display: inline-block;
   height: 50px;
   line-height: 70px;
   text-align: end;
   width: 50px;
+  color: #000;
+}
+
+.Header p {
+  max-width: 500px;
+  text-align: left;
+  font-size: 16px;
+  line-height: 1.65;
+  margin: 1.5rem auto;
 }
