@@ -208,7 +208,7 @@ class Auth extends Component {
     }
 
     return (
-      <div id="hideAuth">
+      <div id="hideAuth" className="authTest">
         {authDisplay}
         {form}
       </div>

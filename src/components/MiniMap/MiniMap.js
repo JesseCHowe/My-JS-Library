@@ -63,8 +63,8 @@ class miniMap extends Component {
     iframeDoc.write(html);
     iframeDoc.querySelector(".showHead").remove();
     iframeDoc.querySelector(".testMini").remove();
+    iframeDoc.querySelector(".authTest").remove();
 
-    //testMini
     iframeDoc.close();
 
     function getDimensions() {
