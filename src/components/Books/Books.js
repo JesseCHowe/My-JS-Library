@@ -59,7 +59,7 @@ class Books extends Component {
     };
 
     return (
-      <div className={styles.Books}>
+      <div className={[styles.Books, "myTest"].join(" ")}>
         {Object.keys(this.props.library)
           .sort(sortMethod)
           .filter(typeMethod)

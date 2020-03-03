@@ -33,7 +33,6 @@ class miniMap extends Component {
     controller.className = styles.slider__controller;
 
     sliderContent.className += styles.slider__content;
-    // sliderContent.style.transformOrigin = `0  0`;
 
     let html = doc.documentElement.outerHTML.replace(
       /<script([\s\S]*?)>([\s\S]*?)<\/script>/gim,
@@ -63,7 +62,9 @@ class miniMap extends Component {
     iframeDoc.open();
     iframeDoc.write(html);
     iframeDoc.querySelector(".showHead").remove();
+    iframeDoc.querySelector(".testMini").remove();
 
+    //testMini
     iframeDoc.close();
 
     function getDimensions() {
@@ -159,7 +160,7 @@ class miniMap extends Component {
       }, 0);
     }
     return (
-      <div id="theMiniMap" className={styles.myMap}>
+      <div id="theMiniMap" className={[styles.myMap, "testMini"].join(" ")}>
         <BookCount count={bookCount} />
         <div className={[styles.miniMap, "myMap"].join(" ")}></div>
       </div>

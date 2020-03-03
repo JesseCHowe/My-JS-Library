@@ -8,7 +8,7 @@ const header = () => (
     </h1>
     <p>
       This is a project I built to practice React and state management. It is a
-      simple library app with a few addtional features. The layout is inspired
+      simple library app with a few additional features. The layout is inspired
       by The Pudding's <a href="#">Hipster Summer Reading List</a>
     </p>
     <p>
