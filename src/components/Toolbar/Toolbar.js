@@ -7,10 +7,23 @@ import SearchBar from "./SeachBar/SearchBar";
 import AddBookDisplay from "./AddBookDisplay/AddBookDisplay";
 
 class Toolbar extends Component {
+  state = {
+    expand: false
+  };
   onExpandHandler = () => {
-    console.log("WORKING");
     const myIntsct = document.querySelector("#myIntersect");
-    myIntsct.style.transform = "translateX(0)";
+
+    if (this.state.expand) {
+      myIntsct.style.transform = "translateX(-100%)";
+      this.setState({
+        expand: false
+      });
+    } else {
+      myIntsct.style.transform = "translateX(0)";
+      this.setState({
+        expand: true
+      });
+    }
   };
   render() {
     let displayAddBook;
