@@ -1,0 +1,11 @@
+.SignUp {
+  background: #fff;
+  box-shadow: 5px 5px #000;
+  padding: 0.5rem;
+}
+
+@media (max-width: 500px) {
+  .SignUp {
+    box-shadow: none;
+  }
+}

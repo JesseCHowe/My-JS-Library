@@ -1,36 +1,110 @@
-* {
-  padding: 0;
-  margin: 0;
+.Toolbar {
+  display: none;
+  font-weight: bold;
+  position: fixed;
+  text-align: left;
+  top: 0;
+  width: 240px;
+  z-index: 400;
 }
 
-.Toolbar {
-  width: 240px;
+.SlideInBar input {
+  display: block;
+  border: none;
+  border-bottom: 1px solid #000;
+  width: 100%;
+}
+
+.SpecialOverlay {
+  background: rgba(0, 0, 0, 0.5);
+  height: 100%;
+  left: 0;
   position: fixed;
   top: 0;
-  z-index: 50;
+  width: 100%;
+  z-index: 200;
+}
+
+.ToolbarMobile {
+  font-weight: bold;
+  position: fixed;
   text-align: left;
-  text-transform: uppercase;
-}
-.Expand {
-  transform: translateX(220px);
-  margin: 0;
   top: 0;
-  padding: 1em;
-  border: 0;
-  background: #2f3136;
-  color: #efefef;
+  width: 240px;
+  z-index: 300;
 }
+
+.Expand {
+  background: #fff;
+  border: 0;
+  box-shadow: 5px 5px #000;
+  box-sizing: border-box;
+  color: #000;
+  height: 47px;
+  left: 1rem;
+  margin: 0;
+  padding: 0.5rem;
+  position: fixed;
+  top: 1rem;
+  width: fit-content;
+}
+
+.expndBtn {
+  display: flex;
+  flex-direction: column;
+  height: 25px;
+  justify-content: space-between;
+  width: 30px;
+}
+
+.bar {
+  background: #000;
+  height: 3px;
+  width: 100%;
+}
+
+.bar:last-child {
+  width: 80%;
+}
+
 .SlideInBar > * {
   margin: 1em 0;
 }
+
 .SlideInBar {
-  background: #2f3136;
+  background: #fff;
+  box-shadow: 5px 3px #000;
+  color: #000;
   height: 100vh;
   padding: 1em;
+}
+
+.ToolbarMobile .SlideInBar {
+  box-shadow: none;
+}
+
+@media (min-width: 1120px) {
+  .Expand {
+    display: none;
+  }
+  .Toolbar {
+    display: block;
+  }
+  .ToolbarMobile {
+    display: none;
+  }
 }
 
 @media (min-width: 570px) {
   .Toolbar {
     min-height: 100vh;
+  }
+}
+
+@media (max-width: 500px) {
+  .Expand {
+    box-shadow: none;
+    left: 0;
+    top: 0;
   }
 }

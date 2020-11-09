@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import * as actions from "../../../store/actions/index";
 
 class SearchBar extends Component {
-  onSeachHandler = e => {
+  onSeachHandler = (e) => {
     this.props.onEnterSearch(e.target.value);
   };
 
@@ -13,16 +13,16 @@ class SearchBar extends Component {
       <Input
         label="Search"
         inputType="Search"
-        changed={e => this.onSeachHandler(e)}
+        changed={(e) => this.onSeachHandler(e)}
       />
     );
   }
 }
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    onEnterSearch: searchField =>
-      dispatch(actions.enterSearchField(searchField))
+    onEnterSearch: (searchField) =>
+      dispatch(actions.enterSearchField(searchField)),
   };
 };
 

@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./Input.module.css";
 
-const input = props => {
+const input = (props) => {
   let inputElement = null;
   const inputClasses = [styles.InputElement];
 
@@ -13,7 +13,7 @@ const input = props => {
     case "input":
       inputElement = (
         <input
-          className={inputClasses.join(" ")}
+          className={styles[props.label]}
           onChange={props.changed}
           value={props.value}
           {...props.elementConfig}
@@ -24,6 +24,17 @@ const input = props => {
       inputElement = (
         <textarea
           className={inputClasses.join(" ")}
+          onChange={props.changed}
+          value={props.value}
+          {...props.elementConfig}
+        />
+      );
+      break;
+    case "number":
+      inputElement = (
+        <input
+          className={inputClasses.join(" ")}
+          type="number"
           onChange={props.changed}
           value={props.value}
           {...props.elementConfig}
@@ -42,10 +53,10 @@ const input = props => {
   }
 
   return (
-    <div className={[styles.Input, styles[props.inputType]].join(" ")}>
+    <React.Fragment>
       <label>{props.label}</label>
       {inputElement}
-    </div>
+    </React.Fragment>
   );
 };
 

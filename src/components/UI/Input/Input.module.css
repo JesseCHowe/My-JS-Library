@@ -1,19 +1,9 @@
 .Input input {
-  background: none;
-  border: 0;
-  border-bottom: 1px solid #efefef;
-  margin: 0;
-  width: 100%;
-  /* max-width: 250px; */
-  font-size: 1em;
-  color: #efefef;
+  margin: 0.5rem auto;
+  padding: 0.5rem;
 }
 
-.EditBook {
-  margin: 1em 0;
-}
-
-.Input label {
-  text-align: left;
-  text-transform: capitalize;
+.Search {
+  display: block;
+  border: none;
 }

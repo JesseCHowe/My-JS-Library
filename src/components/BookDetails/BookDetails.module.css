@@ -3,17 +3,16 @@
 }
 
 .BookDisplay {
-  text-align: left;
-  z-index: 500;
-  position: relative;
   background: none;
-  width: 60%;
-  min-width: 240px;
-  max-width: 500px;
-  overflow: hidden;
   font-family: "Open Sans", sans-serif;
   font-weight: 300;
   line-height: 1.5;
+  max-width: 500px;
+  min-width: 240px;
+  position: relative;
+  text-align: left;
+  width: 60%;
+  z-index: 500;
 }
 
 .Mode {
@@ -24,41 +23,47 @@
 }
 
 .bookDisplayContainer {
-  background: #36393f;
-  box-shadow: 0 0 12px rgba(0, 0, 0, 0.3);
+  background: #fff;
 }
 
 .BookDisplay .Mode button {
-  width: 50%;
-  padding: 0;
-  margin: 0;
-  border: 0;
   background: #efefef;
+  border: 0;
   color: #36393f;
-  height: 40px;
-  font-weight: bold;
   font-size: 1.2rem;
+  font-weight: bold;
+  height: 40px;
+  margin: 0;
+  padding: 0;
+  width: 50%;
 }
 
 .BookDisplay .View {
-  position: absolute;
   bottom: 0;
   left: 0;
+  position: absolute;
 }
 
 .BookDisplay .Edit {
-  position: absolute;
   bottom: 0;
+  position: absolute;
   right: 0;
 }
 
 .BookDisplay .Mode button:disabled {
-  background: #36393f;
-  color: #efefef;
+  background: #fff;
+  color: #000;
   height: 60px;
 }
 
-img {
-  max-width: 200px;
-  border: 2px solid teal;
+@media (max-width: 700px) {
+  .BookDisplay {
+    width: 95%;
+  }
+}
+
+@media (max-width: 500px) {
+  /* .BookDisplay .Mode {
+    display: none;
+  } */
 }

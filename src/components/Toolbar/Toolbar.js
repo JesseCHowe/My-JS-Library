@@ -1,56 +1,92 @@
 import React, { Component } from "react";
 import styles from "./Toolbar.module.css";
 import { connect } from "react-redux";
-import * as actions from "../../store/actions/index";
 import SortCategories from "./SortCategories/SortCategories";
 import SearchBar from "./SeachBar/SearchBar";
-import AddBookDisplay from "./AddBookDisplay/AddBookDisplay";
 
 class Toolbar extends Component {
   state = {
-    expand: false
+    expand: false,
+  };
+
+  closeExpandHandler = () => {
+    const myIntsct = document.querySelector("#myIntersectmobile");
+    myIntsct.style.transform = "translateX(-103%)";
+    this.setState({
+      expand: false,
+    });
   };
   onExpandHandler = () => {
-    const myIntsct = document.querySelector("#myIntersect");
-
+    const myIntsct = document.querySelector("#myIntersectmobile");
     if (this.state.expand) {
-      myIntsct.style.transform = "translateX(-100%)";
+      myIntsct.style.transform = "translateX(-103%)";
       this.setState({
-        expand: false
+        expand: false,
       });
     } else {
       myIntsct.style.transform = "translateX(0)";
       this.setState({
-        expand: true
+        expand: true,
       });
     }
   };
+
   render() {
-    let displayAddBook;
-    if (this.props.userId) {
-      displayAddBook = <AddBookDisplay />;
-    }
-    return (
+    const toolBarDesktop = (
       <div className={[styles.Toolbar, "visible"].join(" ")}>
         <div id="myIntersect" className={styles.SlideInBar}>
-          <button
-            className={styles.Expand}
-            onClick={() => this.onExpandHandler()}
-          >
-            EXPAND
-          </button>
-          {displayAddBook}
           <SearchBar />
           <SortCategories />
         </div>
       </div>
     );
+
+    let overlay;
+    if (this.state.expand) {
+      overlay = (
+        <div
+          className={styles.SpecialOverlay}
+          onClick={() => this.closeExpandHandler()}
+        />
+      );
+    }
+    const toolBarMobile = (
+      <React.Fragment>
+        <button
+          className={styles.Expand}
+          onClick={() => this.onExpandHandler()}
+        >
+          <div className={styles.expndBtn}>
+            <div className={styles.bar} />
+            <div className={styles.bar} />
+            <div className={styles.bar} />
+          </div>
+        </button>
+        {overlay}
+        <div
+          id="myIntersectmobile"
+          className={[styles.ToolbarMobile, "visible"].join(" ")}
+        >
+          <div className={styles.SlideInBar}>
+            <SearchBar />
+            <SortCategories />
+          </div>
+        </div>
+      </React.Fragment>
+    );
+
+    return (
+      <React.Fragment>
+        {toolBarDesktop}
+        {toolBarMobile}
+      </React.Fragment>
+    );
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
-    userId: state.auth.userId
+    userId: state.auth.userId,
   };
 };
 

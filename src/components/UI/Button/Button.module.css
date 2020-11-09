@@ -1,35 +1,72 @@
-.Button {
-  color: #333;
-  background: #efefef;
-  font-weight: bold;
-  padding: 0.5rem;
-  margin: 0.5rem;
-  border: 0;
-  text-align: center;
+.AddBook {
+  background: #fff;
+  border: 1px solid #000;
+  border-radius: 50%;
+  bottom: 1rem;
+  box-shadow: 2px 2px 0px #000;
+  font-size: 1.5rem;
+  height: 50px;
+  position: fixed;
+  right: 1rem;
+  width: 50px;
+  z-index: 100;
 }
 
-.SignIn {
-  display: block;
-  margin: 0 auto;
-}
-.Update {
-  color: #36393f;
-  margin: 0 auto;
-  display: block;
+.Button {
   background: #efefef;
-  font-weight: bold;
-  padding: 1rem;
   border: 0;
+  color: #333;
+  font-weight: bold;
+  margin: 0.5rem;
+  padding: 0.5rem;
+  text-align: center;
 }
 
 .changeAuth {
   background: none;
-  color: #efefef;
-  font-size: 0.5em;
-  padding: 0.5rem;
-  margin: 0.5rem;
-  text-decoration: underline;
   border: 0;
+  color: #717171;
+  display: block;
+  font-size: 0.75rem;
+  margin: 0.5rem auto;
+  padding: 0.5rem;
+  text-decoration: underline;
+}
+
+.Logout {
+  background-color: #000;
+  border: 0;
+  color: #fff;
+  font-weight: bold;
+  margin-top: 0.2em;
+  padding: 1em;
+  width: 100%;
+}
+
+.SignIn {
+  display: block;
+  position: fixed;
+  right: 1rem;
+  top: 1rem;
+}
+
+.Sort {
+  background: none;
+  border: 1px solid #000;
+  color: #000;
+  margin: 0.25em 0;
+  text-transform: uppercase;
+  width: 100%;
+}
+
+.Update {
+  background: #efefef;
+  border: 0;
+  color: #36393f;
+  display: block;
+  font-weight: bold;
+  margin: 0 auto;
+  padding: 1rem;
 }
 
 .Welcome {
@@ -38,28 +75,4 @@
   color: #fff;
   font-size: 1em;
   font-weight: bold;
-}
-
-.Logout {
-  width: 100%;
-  background-color: #000;
-  font-weight: bold;
-  border: 0;
-  padding: 1em;
-  color: #fff;
-  margin-top: 0.2em;
-}
-
-/* .Welcome span {
-  color: lightgray;
-  font-size: 0.7em;
-} */
-
-.Sort {
-  background: none;
-  color: #efefef;
-  border: 1px solid #efefef;
-  text-transform: uppercase;
-  width: 100%;
-  margin: 0.25em 0;
 }

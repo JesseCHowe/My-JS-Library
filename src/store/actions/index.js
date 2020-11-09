@@ -5,11 +5,12 @@ export {
   displayBook,
   hideBook,
   displayAddBook,
-  editBook
+  editBook,
 } from "./myJSLibrary";
 export { auth, authCheckState, display, logout } from "./auth";
 export {
   chooseSortMethod,
   chooseBookType,
-  enterSearchField
+  enterSearchField,
 } from "./filterMethods";
+export { setColor } from "./colorSelection";

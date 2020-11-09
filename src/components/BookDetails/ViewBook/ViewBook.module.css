@@ -1,0 +1,49 @@
+.Author {
+  font-size: 0.8rem;
+  color: gray;
+}
+
+.ViewBook {
+  display: flex;
+  padding: 1em;
+  flex-wrap: wrap;
+  box-sizing: border-box;
+}
+
+.ViewBook > * {
+  padding: 0.2em;
+}
+
+.ViewBook p {
+  color: #000;
+  word-break: break-word;
+}
+
+.ViewBook p span {
+  font-size: 0.75em;
+  color: #1e1e1e;
+}
+
+.ContentContainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 1rem;
+  width: 100%;
+}
+
+.AboutBook {
+  align-self: center;
+  justify-self: center;
+}
+
+.Title {
+  font-weight: bold;
+}
+
+@media (max-width: 500px) {
+  .ContentContainer {
+    display: block;
+    margin: 0 auto;
+    max-width: 275px;
+  }
+}

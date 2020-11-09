@@ -1,86 +1,73 @@
 import React, { Component } from "react";
-import Input from "../UI/Input/Input";
-import Spinner from "../UI/Spinner/Spinner";
+import Input from "../../UI/Input/Input";
+import Spinner from "../../UI/Spinner/Spinner";
 import { connect } from "react-redux";
-import * as actions from "../../store/actions/index";
+import * as actions from "../../../store/actions/index";
 import styles from "./EditBook.module.css";
 
 class EditBook extends Component {
   state = {
     bookForm: {
-      cover: {
-        elementType: "input",
-        elementConfig: {
-          type: "text",
-          placeholder: "Book Image"
-        },
-        validation: {
-          required: false
-        },
-        value: this.props.bookToDisplay.cover,
-        valid: true,
-        touched: false
-      },
       title: {
         elementType: "input",
         elementConfig: {
           type: "text",
-          placeholder: "Book Title"
+          placeholder: "Book Title",
         },
         value: this.props.bookToDisplay.title,
         validation: {
-          required: false
+          required: false,
         },
         valid: true,
-        touched: false
+        touched: false,
       },
       author: {
         elementType: "input",
         elementConfig: {
           type: "text",
-          placeholder: "Author"
+          placeholder: "Author",
         },
         value: this.props.bookToDisplay.author,
         validation: {
-          required: true
+          required: true,
         },
         valid: true,
-        touched: false
+        touched: false,
       },
       read: {
         elementType: "text",
         elementConfig: {
-          type: "text",
-          placeholder: "Pages Read"
+          type: "number",
+          placeholder: "Pages Read",
         },
         value: this.props.bookToDisplay.read,
         validation: {
           required: true,
-          isNumber: true
+          isNumber: true,
         },
         valid: true,
-        touched: false
+        touched: false,
       },
       pages: {
         elementType: "text",
         elementConfig: {
-          type: "text",
-          placeholder: "Total Pages"
+          type: "number",
+          placeholder: "Total Pages",
         },
         value: this.props.bookToDisplay.pages,
         validation: {
           required: true,
-          isNumber: true
+          isNumber: true,
         },
         valid: true,
-        touched: false
-      }
+        touched: false,
+      },
     },
     formIsValid: true,
-    updating: false
+    updating: false,
   };
 
-  updateBookHandler = event => {
+  updateBookHandler = (event) => {
     event.preventDefault();
     const formData = {};
     for (let formElementIdentifier in this.state.bookForm) {
@@ -138,22 +125,23 @@ class EditBook extends Component {
     const formElementsArray = [];
     for (let key in this.state.bookForm) {
       formElementsArray.push({
+        config: this.state.bookForm[key],
         id: key,
-        config: this.state.bookForm[key]
       });
     }
     let form = (
       <form onSubmit={this.updateBookHandler}>
-        {formElementsArray.map(formElement => (
-          <fieldset>
+        {formElementsArray.map((formElement) => (
+          <fieldset className={styles[formElement.id]} key={formElement.id}>
             <Input
-              inputType="EditBook"
-              label={formElement.id}
-              changed={event => this.inputChangedHandler(event, formElement.id)}
-              elementType={formElement.config.elementType}
+              changed={(event) =>
+                this.inputChangedHandler(event, formElement.id)
+              }
               elementConfig={formElement.config.elementConfig}
+              elementType={formElement.config.elementType}
+              inputType="EditBook"
               invalid={!formElement.config.valid}
-              key={formElement.id}
+              label={formElement.id}
               shouldValidate={formElement.config.validation}
               touched={formElement.config.touched}
               value={formElement.config.value}
@@ -161,7 +149,7 @@ class EditBook extends Component {
           </fieldset>
         ))}
         <button className={styles.Update} disabled={!this.state.formIsValid}>
-          UPDATE
+          Update
         </button>
       </form>
     );
@@ -176,7 +164,7 @@ class EditBook extends Component {
         <div className={styles.EditForm}>
           {form}
           <button className={styles.Delete} onClick={this.deleteBookHandler}>
-            DELETE
+            Delete
           </button>
         </div>
       );
@@ -186,18 +174,18 @@ class EditBook extends Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     displayAddBookForm: state.library.displayAddBookForm,
     displayBook: state.library.displayBook,
     library: state.library.books,
     token: state.auth.token,
     userId: state.auth.userId,
-    bookToDisplay: state.library.bookToDisplay
+    bookToDisplay: state.library.bookToDisplay,
   };
 };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
     onAddBook: (bookInfo, bookId, token) =>
       dispatch(actions.addBook(bookInfo, bookId, token)),
@@ -205,7 +193,7 @@ const mapDispatchToProps = dispatch => {
     onEditBook: (selectedBookId, newBookInfo, userId, token) =>
       dispatch(actions.editBook(selectedBookId, newBookInfo, userId, token)),
     onDeleteBook: (userId, bookKey, token) =>
-      dispatch(actions.deleteBook(userId, bookKey, token))
+      dispatch(actions.deleteBook(userId, bookKey, token)),
   };
 };
 

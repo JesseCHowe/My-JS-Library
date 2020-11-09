@@ -1,0 +1,63 @@
+.Design {
+  position: relative;
+  width: 50%;
+}
+
+.Design span {
+  bottom: 0;
+  color: #333;
+  display: block;
+  font-size: 1.5rem;
+  font-weight: bold;
+  position: absolute;
+  right: 0.2em;
+  text-align: right;
+}
+
+.FormContainer {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.FormContainer input {
+  display: block;
+  margin: 1rem auto;
+  padding: 0.5rem;
+}
+
+.FormContainer button {
+  font-weight: bold;
+  padding: 0.5rem;
+}
+
+.SignBtn {
+  border: 1px solid #000;
+  box-shadow: 2px 2px #000;
+  display: block;
+  margin: 0.5rem auto;
+}
+
+.Signup {
+  background: #fff;
+  display: flex;
+  max-width: 550px;
+  min-height: 400px;
+  width: 95%;
+}
+
+@media (max-width: 700px) {
+  .Design {
+    width: 100%;
+  }
+  .Design span {
+    font-size: 3.5vw;
+    position: relative;
+  }
+  .Signup {
+    display: block;
+    min-height: fit-content;
+    width: 95%;
+  }
+}

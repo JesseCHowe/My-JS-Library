@@ -1,14 +1,25 @@
 .Overlay {
-  position: fixed;
-  height: 100vh;
-  width: 100%;
-  top: 0;
-  z-index: 250;
-  display: flex;
-  justify-content: center;
   align-items: center;
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 200;
 }
 
 .Overlay > * {
-  z-index: 500;
+  z-index: 300;
+}
+
+.Backdrop {
+  background: rgba(0, 0, 0, 0.5);
+  height: 100%;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 200;
 }

@@ -1,24 +1,23 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import styles from "./BookDisplay.module.css";
+import styles from "./BookDetails.module.css";
 import * as actions from "../../store/actions/index";
 import Overlay from "../UI/Overlay/Overlay";
-import Backdrop from "../UI/Backdrop/Backdrop";
-import ViewBook from "../ViewBook/ViewBook";
-import EditBook from "../EditBook/EditBook";
+import ViewBook from "./ViewBook/ViewBook";
+import EditBook from "./EditBook/EditBook";
 
-class BookDisplay extends Component {
+class BookDetails extends Component {
   state = {
     editMode: false,
     disableEditBtn: false,
-    disableViewBtn: true
+    disableViewBtn: true,
   };
 
   editModeHandler = () => {
     this.setState({
       editMode: !this.state.editMode,
       disableEditBtn: !this.state.disableEditBtn,
-      disableViewBtn: !this.state.disableViewBtn
+      disableViewBtn: !this.state.disableViewBtn,
     });
   };
 
@@ -26,7 +25,7 @@ class BookDisplay extends Component {
     this.setState({
       editMode: false,
       disableEditBtn: false,
-      disableViewBtn: true
+      disableViewBtn: true,
     });
     this.props.onHideBook();
   };
@@ -35,6 +34,7 @@ class BookDisplay extends Component {
     let bookDisplay;
     let bookDisplayContent;
     let editButton;
+    let viewButton;
     if (this.props.displayBook) {
       bookDisplayContent = <ViewBook />;
       if (this.props.userId) {
@@ -48,12 +48,7 @@ class BookDisplay extends Component {
             Edit
           </button>
         );
-      }
-      bookDisplay = (
-        <Overlay>
-          <Backdrop clicked={this.hideBookDisplayHandler} />
-          <div className={styles.BookDisplay}>
-            <div className={styles.Mode}>
+        viewButton = (
               <button
                 className={styles.View}
                 onClick={this.editModeHandler}
@@ -61,6 +56,13 @@ class BookDisplay extends Component {
               >
                 View
               </button>
+        );
+      }
+      bookDisplay = (
+        <Overlay clicked={this.hideBookDisplayHandler}>
+          <div className={styles.BookDisplay}>
+            <div className={styles.Mode}>
+              {viewButton}
               {editButton}
             </div>
             <div className={styles.bookDisplayContainer}>
@@ -75,22 +77,22 @@ class BookDisplay extends Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     library: state.library.books,
     displayBook: state.library.displayBook,
     bookToDisplay: state.library.bookToDisplay,
     userId: state.auth.userId,
-    token: state.auth.token
+    token: state.auth.token,
   };
 };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
     onDeleteBook: (userId, bookKey, token) =>
       dispatch(actions.deleteBook(userId, bookKey, token)),
-    onHideBook: () => dispatch(actions.hideBook())
+    onHideBook: () => dispatch(actions.hideBook()),
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(BookDisplay);
+export default connect(mapStateToProps, mapDispatchToProps)(BookDetails);

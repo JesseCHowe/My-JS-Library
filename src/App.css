@@ -1,17 +1,13 @@
-.App {
-  /* text-align: center; */
-  background-color: #36393f;
-  min-height: 130vh;
-}
 .Flex-Container {
   position: relative;
 }
 
 #myIntersect {
-  transform: translateX(-100%);
+  transform: translateX(-103%);
   transition: 1s;
 }
 
-.TESTBOOKS {
-  position: absolute;
+#myIntersectmobile {
+  transform: translateX(-103%);
+  transition: 1s; 
 }

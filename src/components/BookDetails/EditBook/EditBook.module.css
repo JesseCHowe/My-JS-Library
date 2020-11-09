@@ -1,0 +1,54 @@
+.Delete {
+  background: #b9483d;
+  border: 0;
+  bottom: 0;
+  color: #efefef;
+  font-size: 12px;
+  font-weight: bold;
+  height: 40px;
+  padding: 1em;
+  position: absolute;
+  right: 0;
+}
+
+.EditForm {
+  padding: 1em;
+}
+
+.EditForm fieldset {
+  border: none;
+  color: #000;
+  margin: 1rem auto;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  column-gap: 1rem;
+  align-items: center;
+}
+
+.EditForm form {
+  position: relative;
+  width: fit-content;
+  margin: 0 auto;
+}
+
+.EditForm label {
+  text-align: right;
+  text-transform: capitalize;
+}
+
+.EditForm input {
+  padding: 0.5rem 0.2rem;
+  border: none;
+  border-bottom: 1px solid #000;
+  width: 215px;
+}
+
+.Update {
+  background: #efefef;
+  border: 0;
+  color: #36393f;
+  display: block;
+  font-weight: bold;
+  margin: 0 auto 2rem auto;
+  padding: 1rem;
+}

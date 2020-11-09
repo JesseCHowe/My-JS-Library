@@ -1,11 +1,10 @@
-import React from "react";
-import { Component } from "react";
+import React, { Component } from "react";
 import { connect } from "react-redux";
 import * as actions from "../../../store/actions/index";
 import Button from "../../UI/Button/Button";
 
 class SortCategories extends Component {
-  onSortHandler = method => {
+  onSortHandler = (method) => {
     this.props.onSort(method);
   };
 
@@ -15,9 +14,13 @@ class SortCategories extends Component {
     return (
       <div>
         <p>SORT BY</p>
-        {sort.map(item => {
+        {sort.map((item) => {
           return (
-            <Button btnType="Sort" clicked={() => this.onSortHandler(item)}>
+            <Button
+              key={item}
+              btnType="Sort"
+              clicked={() => this.onSortHandler(item)}
+            >
               {item}
             </Button>
           );
@@ -27,9 +30,9 @@ class SortCategories extends Component {
   }
 }
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    onSort: method => dispatch(actions.chooseSortMethod(method))
+    onSort: (method) => dispatch(actions.chooseSortMethod(method)),
   };
 };
 

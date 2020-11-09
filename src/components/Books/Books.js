@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import styles from "./Books.module.css";
-
 import Book from "./Book/Book";
 
 class Books extends Component {
@@ -51,8 +50,8 @@ class Books extends Component {
 
     let letter;
 
-    let typeMethod = book => book;
-    let nameMethod = book => {
+    let typeMethod = (book) => book;
+    let nameMethod = (book) => {
       const bookTitle = this.props.library[book].title.toLowerCase().trim();
       const inputField = this.props.searchField.toLowerCase().trim();
       return bookTitle.includes(inputField);
@@ -92,7 +91,7 @@ class Books extends Component {
                   book={this.props.library[item].title}
                   bookObj={{
                     key: Object.keys(this.props.library)[newidx],
-                    book: this.props.library[item]
+                    book: this.props.library[item],
                   }}
                   clicked={this.props.displayBook}
                   key={Object.keys(this.props.library)[newidx]}

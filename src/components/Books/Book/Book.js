@@ -11,33 +11,19 @@ class Book extends Component {
 
   render() {
     let bookStyle = {
-      minHeight: "20px",
-      maxHeight: "150px",
-      minWidth: "400px",
-      maxWidth: "550px",
       height: `${this.props.bookObj.book.pages * 0.5}px`,
-      width: `${this.props.bookObj.book.pages * 1.05}px`
     };
 
-    const randomStyles = [
-      styles.Red,
-      styles.Green,
-      styles.Blue,
-      styles.Yellow,
-      styles.Orange
-    ];
-
     let style = {
-      minHeight: "20px",
-      maxHeight: "150px",
       height: `${this.props.bookObj.book.pages * 0.5}px`,
-      width: `${(this.props.bookObj.book.read / this.props.bookObj.book.pages) *
-        100}%`,
+      width: `${
+        (this.props.bookObj.book.read / this.props.bookObj.book.pages) * 100
+      }%`,
       position: "absolute",
       left: "0",
       top: "0",
-      background: "#ffed77",
-      zIndex: "-1"
+      background: `var(--highlight-${this.props.color})`,
+      zIndex: "-1",
     };
 
     let bookInternal = (
@@ -52,7 +38,6 @@ class Book extends Component {
         style={bookStyle}
         className={[
           styles.BookContain,
-          randomStyles[Math.floor(Math.random() * 5)]
         ].join(" ")}
         onClick={this.bookDisplayHandler}
       >
@@ -62,10 +47,15 @@ class Book extends Component {
   }
 }
 
-const mapDispatchToProps = dispatch => {
+const mapStateToProps = (state) => {
   return {
-    onDisplayBook: bookInfo => dispatch(actions.displayBook(bookInfo))
+    color: state.selectColor.color,
+  };
+};
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onDisplayBook: (bookInfo) => dispatch(actions.displayBook(bookInfo)),
   };
 };
 
-export default connect(null, mapDispatchToProps)(Radium(Book));
+export default connect(mapStateToProps, mapDispatchToProps)(Radium(Book));
